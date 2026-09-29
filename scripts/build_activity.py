@@ -4,8 +4,8 @@
     python scripts/build_activity.py --sample   # offline preview
 
 Runs every day in .github/workflows/refresh-activity.yml.
-Private contributions are included as an anonymous count when the
-profile setting "Include private contributions" is on.
+Private contributions show up as anonymous counts when the profile
+setting "Include private contributions" is on.
 """
 import json
 import os
@@ -35,7 +35,6 @@ query($login: String!) {
       }
     }
     contributionsCollection {
-      restrictedContributionsCount
       contributionCalendar {
         totalContributions
         weeks { contributionDays { contributionCount date } }
@@ -107,8 +106,9 @@ def build(user):
     pad = 56
     cc = user["contributionsCollection"]
     cal = cc["contributionCalendar"]
-    # Private work counts too (only the number is public, never the repos).
-    total = cal["totalContributions"] + cc.get("restrictedContributionsCount", 0)
+    # With "Include private contributions" on, the calendar already counts
+    # private work (anonymized), so the total matches the profile graph.
+    total = cal["totalContributions"]
     weeks = cal["weeks"][-53:]
     days = [d for w in weeks for d in w["contributionDays"]]
     current, longest = streaks(days)
