@@ -175,7 +175,7 @@ def build(user):
             if lvl == 0:
                 rects.append(f'<rect x="{x:.0f}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="#ffffff" fill-opacity="0.05"/>')
             else:
-                rects.append(f'<rect class="c" style="animation-delay:{wi * 0.025:.2f}s" x="{x:.0f}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="{LIME}" fill-opacity="{levels[lvl]}"/>')
+                rects.append(f'<rect x="{x:.0f}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="{LIME}" fill-opacity="{levels[lvl]}"/>')
     grid_bottom = gy + 7 * (cell + gap) - gap
     legend_y = grid_bottom + 34
     legend = [text("LESS", W - pad - 168, legend_y, "mono-400", 11, ZINC, tracking=0.1)]
@@ -189,9 +189,6 @@ def build(user):
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="GitHub activity: {cal['totalContributions']} contributions in the last year.">
   <title>GitHub activity for {LOGIN}</title>
   <style>
-    .c {{ animation: pop .5s cubic-bezier(.2,.8,.2,1.2) backwards; transform-box: fill-box; transform-origin: center; }}
-    @keyframes pop {{ from {{ transform: scale(0); }} }}
-    @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
   </style>
   <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="28" fill="{NIGHT}" stroke="{RIM}"/>
   {text("ACTIVITY", pad, 60, "mono-500", 13, LIME, tracking=0.12)}

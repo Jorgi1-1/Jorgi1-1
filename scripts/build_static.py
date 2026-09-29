@@ -66,8 +66,10 @@ def hero():
     qx = pad + measure("JORGE", "display-900", size, -0.01) + (avail - measure("JORGE", "display-900", size, -0.01) - measure("TOVAR", "display-900", size, -0.01) - qsize) / 2
     qy = name_y - qsize * 0.93
 
-    letter_svg = "\n".join(
-        f'    <path class="ltr" style="animation-delay:{i * 0.09:.2f}s,{0.9 + i * 0.09:.2f}s" pathLength="1" d="{d}"/>'
+    # The fill is always there, so the name reads even where SVG animation
+    # doesn't run (thumbnails, throttled tabs). A neon outline traces over it.
+    letter_svg = f'    <path fill="url(#shine)" d="{" ".join(letters)}"/>\n' + "\n".join(
+        f'    <path class="tube" style="animation-delay:{0.3 + i * 0.09:.2f}s" pathLength="1" d="{d}"/>'
         for i, d in enumerate(letters)
     )
 
@@ -112,10 +114,10 @@ def hero():
     </pattern>
   </defs>
   <style>
-    .ltr {{ fill: url(#shine); stroke: {LIME}; stroke-width: 0.9px; vector-effect: non-scaling-stroke;
-           stroke-dasharray: 1 1; animation: draw 1.1s cubic-bezier(.6,0,.2,1) backwards, fillin .5s ease backwards; }}
-    @keyframes draw {{ from {{ stroke-dashoffset: 1; fill-opacity: 0; }} to {{ stroke-dashoffset: 0; fill-opacity: 0; }} }}
-    @keyframes fillin {{ from {{ fill-opacity: 0; }} to {{ fill-opacity: 1; }} }}
+    .tube {{ fill: none; stroke: #f4ffb0; stroke-width: 2px; stroke-linejoin: round; stroke-dasharray: 1 1;
+            stroke-dashoffset: 1; filter: drop-shadow(0 0 4px {LIME}); animation: tube 9s cubic-bezier(.6,0,.2,1) infinite; }}
+    @keyframes tube {{ 0% {{ stroke-dashoffset: 1; opacity: 1; }} 16% {{ stroke-dashoffset: 0; opacity: 1; }}
+                       26%, 100% {{ stroke-dashoffset: 0; opacity: 0; }} }}
     .role {{ opacity: 0; animation: role 9s infinite; }}
     .role-0 {{ opacity: 1; animation-delay: 0s; }}
     .role-1 {{ animation-delay: 3s; }}
