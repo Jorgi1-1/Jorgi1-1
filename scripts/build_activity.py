@@ -4,6 +4,8 @@
     python scripts/build_activity.py --sample   # offline preview
 
 Runs every day in .github/workflows/refresh-activity.yml.
+Private contributions are included as an anonymous count when the
+profile setting "Include private contributions" is on.
 """
 import json
 import os
