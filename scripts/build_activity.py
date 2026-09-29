@@ -33,6 +33,7 @@ query($login: String!) {
       }
     }
     contributionsCollection {
+      restrictedContributionsCount
       contributionCalendar {
         totalContributions
         weeks { contributionDays { contributionCount date } }
@@ -102,7 +103,10 @@ def streaks(days):
 def build(user):
     W, H = 1200, 440
     pad = 56
-    cal = user["contributionsCollection"]["contributionCalendar"]
+    cc = user["contributionsCollection"]
+    cal = cc["contributionCalendar"]
+    # Private work counts too (only the number is public, never the repos).
+    total = cal["totalContributions"] + cc.get("restrictedContributionsCount", 0)
     weeks = cal["weeks"][-53:]
     days = [d for w in weeks for d in w["contributionDays"]]
     current, longest = streaks(days)
@@ -118,7 +122,7 @@ def build(user):
             colors[e["node"]["name"]] = e["node"]["color"] or ZINC
 
     kpis = [
-        (f"{cal['totalContributions']:,}", "CONTRIBUTIONS / YEAR"),
+        (f"{total:,}", "CONTRIBUTIONS / YEAR"),
         (f"{active_days}", "ACTIVE DAYS"),
         (f"{longest}", "LONGEST STREAK"),
         (f"{user['repositories']['totalCount']}", "PUBLIC REPOS"),
@@ -133,7 +137,7 @@ def build(user):
     # Languages: a single stacked bar with a legend underneath (top 5).
     grand = sum(langs.values()) or 1
     top = [(n, v) for n, v in langs.most_common(5) if v / grand >= 0.01]
-    total = sum(v for _, v in top) or 1
+    lang_total = sum(v for _, v in top) or 1
     lx0, lx1 = kx + 16, W - pad
     lw = lx1 - lx0
     if top and lw > 180:
@@ -141,14 +145,14 @@ def build(user):
         x = lx0
         segs = []
         for name, size in top:
-            w = lw * size / total
+            w = lw * size / lang_total
             segs.append(f'<rect x="{x:.1f}" y="104" width="{max(w - 3, 1):.1f}" height="10" rx="3" fill="{colors[name]}"/>')
             x += w
         parts.append("".join(segs))
         ly = 142
         x = lx0
         for name, size in top:
-            label = f"{name} {size / total:.0%}"
+            label = f"{name} {size / lang_total:.0%}"
             wlab = measure(label, "body-400", 14) + 18
             if x + wlab > lx1:
                 x = lx0
@@ -186,7 +190,7 @@ def build(user):
     updated = text(f"LAST 12 MONTHS  ·  CURRENT STREAK {current}  ·  UPDATED {date.today():%Y-%m-%d}",
                    pad, legend_y, "mono-400", 11, ZINC, tracking=0.08)
 
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="GitHub activity: {cal['totalContributions']} contributions in the last year.">
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="GitHub activity: {total} contributions in the last year.">
   <title>GitHub activity for {LOGIN}</title>
   <style>
   </style>
@@ -201,7 +205,7 @@ def build(user):
 """
     ASSETS.mkdir(exist_ok=True)
     (ASSETS / "activity.svg").write_text(svg)
-    print(f"built activity.svg: {cal['totalContributions']} contributions, {len(langs)} languages")
+    print(f"built activity.svg: {total} contributions, {len(langs)} languages")
 
 
 if __name__ == "__main__":
