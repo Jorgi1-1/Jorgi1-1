@@ -131,7 +131,8 @@ def build(user):
         kx += max(measure(value, "display-900", 52), measure(label, "mono-400", 12, 0.1)) + 48
 
     # Languages: a single stacked bar with a legend underneath (top 5).
-    top = langs.most_common(5)
+    grand = sum(langs.values()) or 1
+    top = [(n, v) for n, v in langs.most_common(5) if v / grand >= 0.01]
     total = sum(v for _, v in top) or 1
     lx0, lx1 = kx + 16, W - pad
     lw = lx1 - lx0
