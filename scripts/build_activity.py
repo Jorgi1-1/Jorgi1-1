@@ -15,7 +15,7 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 
-from palette import LIME, MUTED_TEXT, NEON_WHITE, NIGHT, RIM, ZINC
+from palette import LIME, MUTED_TEXT, NEON_WHITE, ZINC, card
 from svgtext import measure, text
 
 LOGIN = os.environ.get("PROFILE_LOGIN", "Jorgi1-1")
@@ -196,7 +196,7 @@ def build(user):
   <title>GitHub activity for {LOGIN}</title>
   <style>
   </style>
-  <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="28" fill="{NIGHT}" stroke="{RIM}"/>
+  {card(W, H)}
   {text("ACTIVITY", pad, 60, "mono-500", 13, LIME, tracking=0.12)}
   {text("AUTO-UPDATED DAILY BY GITHUB ACTIONS", W - pad, 60, "mono-400", 13, ZINC, anchor="end", tracking=0.08)}
   {''.join(parts)}

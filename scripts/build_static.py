@@ -6,8 +6,8 @@ Outputs assets/hero.svg, assets/pipeline.svg and assets/footer.svg.
 """
 from pathlib import Path
 
-from palette import (LIME, MAGENTA, MAUVE, MUTED_TEXT, NEON_WHITE, NIGHT, RIM,
-                     SAGE, TOTEM, ZINC, MAUVE_LIT, SAGE_LIT, MAGENTA_LIT)
+from palette import (BODY, GOLD_SOFT, LIME, MAGENTA, MAUVE, MUTED_TEXT, NEON_WHITE, NIGHT,
+                     SAGE, TOTEM, ZINC, MAUVE_LIT, SAGE_LIT, MAGENTA_LIT, card)
 from svgtext import measure, text, text_path
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
@@ -24,7 +24,7 @@ QULL = {
 REDUCED = "@media (prefers-reduced-motion: reduce){*{animation:none!important}}"
 
 
-def qull(x, y, size, color=LIME, ground=NIGHT):
+def qull(x, y, size, color=LIME, ground=BODY):
     """Qull standing in a square box of `size` px whose top-left is (x, y)."""
     s = size / 108
     return f"""
@@ -95,8 +95,8 @@ def hero():
                   anchor="end", tracking=0.04)
     status_w = measure("OPEN TO FULL-TIME ROLES & FREELANCE", "mono-500", 14, 0.04)
     dot_x = row_right - status_w - 16
-    url = text("JORGI1-1.GITHUB.IO", pad, 92, "mono-400", 13, ZINC, tracking=0.08)
-    index = text("PORTFOLIO / 2026", row_right, 92, "mono-400", 13, ZINC, anchor="end", tracking=0.08)
+    url = text("GITHUB.COM/JORGI1-1", pad, 92, "mono-400", 13, ZINC, tracking=0.08)
+    index = text("PROFILE / 2026", row_right, 92, "mono-400", 13, ZINC, anchor="end", tracking=0.08)
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Jorge Tovar. DevOps and Cloud Engineer, fullstack developer and UX/UI designer.">
   <title>Jorge Tovar: DevOps &amp; Cloud Engineer, Fullstack Developer, UX/UI Designer</title>
@@ -104,7 +104,7 @@ def hero():
     <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
       <stop offset="0" stop-color="{LIME}"/>
       <stop offset="0.42" stop-color="{LIME}"/>
-      <stop offset="0.5" stop-color="#f4ffb0"/>
+      <stop offset="0.5" stop-color="{GOLD_SOFT}"/>
       <stop offset="0.58" stop-color="{LIME}"/>
       <stop offset="1" stop-color="{LIME}"/>
       <animateTransform attributeName="gradientTransform" type="translate" values="-1 0;1 0;1 0" keyTimes="0;0.35;1" dur="7s" repeatCount="indefinite"/>
@@ -114,7 +114,7 @@ def hero():
     </pattern>
   </defs>
   <style>
-    .tube {{ fill: none; stroke: #f4ffb0; stroke-width: 2px; stroke-linejoin: round; stroke-dasharray: 1 1;
+    .tube {{ fill: none; stroke: {GOLD_SOFT}; stroke-width: 2px; stroke-linejoin: round; stroke-dasharray: 1 1;
             stroke-dashoffset: 1; filter: drop-shadow(0 0 4px {LIME}); animation: tube 9s cubic-bezier(.6,0,.2,1) infinite; }}
     @keyframes tube {{ 0% {{ stroke-dashoffset: 1; opacity: 1; }} 16% {{ stroke-dashoffset: 0; opacity: 1; }}
                        26%, 100% {{ stroke-dashoffset: 0; opacity: 0; }} }}
@@ -139,7 +139,7 @@ def hero():
     @keyframes pulse {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: .25; }} }}
     {REDUCED}
   </style>
-  <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="28" fill="{NIGHT}" stroke="{RIM}"/>
+  {card(W, H)}
   <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="28" fill="url(#dots)"/>
   {url}
   {index}
@@ -191,7 +191,7 @@ def pipeline():
       <animate attributeName="fill" values="{muted};{lit};{lit};{muted}" keyTimes="0;{max(t - 0.001, 0):.3f};{min(t + 0.12, 0.97):.3f};1" dur="{dur}s" repeatCount="indefinite"/>
       <animate attributeName="r" values="7;7;10;7;7" keyTimes="0;{max(t - 0.001, 0):.3f};{min(t + 0.03, 0.98):.3f};{min(t + 0.12, 0.99):.3f};1" dur="{dur}s" repeatCount="indefinite"/>
     </circle>
-    {text(name, x, y + 66, "display-700", 26, lit, anchor="middle", tracking=0.02)}
+    {text(name, x, y + 66, "body-600", 22, lit, anchor="middle", tracking=0.08)}
     {text(l1, x, y + 96, "body-400", 16, MUTED_TEXT, anchor="middle")}
     {text(l2, x, y + 120, "body-400", 16, MUTED_TEXT, anchor="middle")}
   </g>""")
@@ -210,7 +210,7 @@ def pipeline():
                        88% {{ stroke-dashoffset: 0; opacity: 0; }} 100% {{ stroke-dashoffset: 1; opacity: 0; }} }}
     {REDUCED}
   </style>
-  <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="28" fill="{NIGHT}" stroke="{RIM}"/>
+  {card(W, H)}
   {text("HOW I SHIP", 56, 56, "mono-500", 13, LIME, tracking=0.12)}
   {text("ONE PERSON, THE WHOLE LIFECYCLE", W - 56, 56, "mono-400", 13, ZINC, anchor="end", tracking=0.08)}
   {track}
@@ -245,7 +245,7 @@ def footer():
     @keyframes spin {{ to {{ transform: rotate(360deg); }} }}
     {REDUCED}
   </style>
-  <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="28" fill="{NIGHT}" stroke="{RIM}"/>
+  {card(W, H)}
 {qull(W / 2 + 26 - w / 2 - 62, 32, 50)}
   {text(line, W / 2 + 26, 76, "display-900", size, LIME, anchor="middle", tracking=0.01)}
   {stripes}

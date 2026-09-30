@@ -1,12 +1,9 @@
-<a href="https://jorgi1-1.github.io">
-  <img src="./assets/hero.svg" alt="Jorge Tovar. DevOps & Cloud Engineer, Fullstack Developer, UX/UI Designer." width="100%" />
-</a>
+<img src="./assets/hero.svg" alt="Jorge Tovar. DevOps & Cloud Engineer, Fullstack Developer, UX/UI Designer." width="100%" />
 
 <p align="center">
-  <a href="https://jorgi1-1.github.io"><img src="https://img.shields.io/badge/Portfolio-jorgi1--1.github.io-c3d809?style=for-the-badge&labelColor=222022&logo=githubpages&logoColor=c3d809" alt="Portfolio" /></a>
-  <a href="https://www.linkedin.com/in/jorge-luis-tovar-arriaga-a20489293"><img src="https://img.shields.io/badge/LinkedIn-Let's_talk-B7245C?style=for-the-badge&labelColor=222022&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-  <a href="mailto:jorgi1tovar@gmail.com"><img src="https://img.shields.io/badge/Email-jorgi1tovar@gmail.com-93A29B?style=for-the-badge&labelColor=222022&logo=gmail&logoColor=white" alt="Email" /></a>
-  <a href="https://www.kansostudio.com.mx"><img src="https://img.shields.io/badge/Studio-Kanso-917C87?style=for-the-badge&labelColor=222022" alt="Kanso Studio" /></a>
+  <a href="https://www.linkedin.com/in/jorge-luis-tovar-arriaga-a20489293"><img src="https://img.shields.io/badge/LinkedIn-Let's_talk-ffd88a?style=for-the-badge&labelColor=131c30&logo=linkedin&logoColor=ffd88a" alt="LinkedIn" /></a>
+  <a href="mailto:jorgi1tovar@gmail.com"><img src="https://img.shields.io/badge/Email-jorgi1tovar@gmail.com-a9c1ff?style=for-the-badge&labelColor=131c30&logo=gmail&logoColor=a9c1ff" alt="Email" /></a>
+  <a href="https://www.kansostudio.com.mx"><img src="https://img.shields.io/badge/Studio-Kanso-8fe0cb?style=for-the-badge&labelColor=131c30" alt="Kanso Studio" /></a>
 </p>
 
 <p align="center">
@@ -25,14 +22,14 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 <table>
   <tr>
     <td width="50%" valign="top">
-      <h3>☁️ DevOps &amp; Cloud @ Soldig</h3>
+      <h3>DevOps &amp; Cloud @ Soldig</h3>
       <p>Started as an intern in 2023 and grew into the role. I co-own the company's DevSecOps practice and build the pipelines that take client apps from commit to production.</p>
       <p><strong>Day to day:</strong> Harness CI/CD, security scanning in every pipeline, Terraform, Docker and Kubernetes on GKE, AWS.</p>
     </td>
     <td width="50%" valign="top">
-      <h3>◯ Kanso Studio</h3>
+      <h3>Kanso Studio</h3>
       <p>My own design studio. I'm its founder and only member, so I cover a whole team's job: design, development, client work and launch.</p>
-      <p><strong>Focus:</strong> minimal, fast landing pages and sites for small businesses in Mexico.</p>
+      <p><strong>Focus:</strong> premium websites for small and growing businesses in Mexico, and the automation behind them.</p>
     </td>
   </tr>
 </table>
@@ -41,26 +38,42 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 
 <table>
   <tr>
-    <td width="33%" valign="top">
-      <h3><a href="https://jorgi1-1.github.io">Portfolio</a></h3>
-      <p>A single page of living type: a WebGPU shader masked into the letters, a color totem as navigation and physics-driven pills.</p>
-      <p><sub>Next.js 16 · React 19 · GSAP · WebGPU</sub></p>
-      <a href="https://github.com/Jorgi1-1/Jorgi1-1.github.io"><img src="https://img.shields.io/github/last-commit/Jorgi1-1/Jorgi1-1.github.io?style=flat-square&color=c3d809&labelColor=222022&label=last%20deploy" alt="Last commit" /></a>
-    </td>
-    <td width="33%" valign="top">
+    <td width="50%" valign="top">
+      <a href="https://www.kansostudio.com.mx"><img src="./assets/work/kanso.svg" alt="Kanso Studio website" width="100%" /></a>
       <h3><a href="https://www.kansostudio.com.mx">Kanso Studio</a></h3>
-      <p>Brand, identity and website for my studio, designed and built end to end.</p>
-      <p><sub>Brand · UX/UI · Web</sub></p>
-      <a href="https://www.kansostudio.com.mx"><img src="https://img.shields.io/badge/live-kansostudio.com.mx-917C87?style=flat-square&labelColor=222022" alt="Live site" /></a>
+      <p>The studio's own site, and its first proof of quality: if the site doesn't feel premium, the pitch doesn't work. Bilingual (ES/EN) and built to turn business owners into conversations.</p>
+      <ul>
+        <li>Four service tiers, each with its own page story: <b>Launch</b>, <b>Elevate</b>, <b>Scale</b> and <b>Custom</b>, from a first website to bespoke software.</li>
+        <li>Three conversion paths: contact form, WhatsApp and a free <i>express audit</i> that promises 5 concrete fixes within 48 hours.</li>
+        <li>Brand, copy system and motion designed from scratch, including a WebGL orb and GSAP-driven transitions.</li>
+      </ul>
+      <p><sub>Next.js 16 · React 19 · GSAP · Framer Motion · OGL · Resend · Vercel</sub></p>
     </td>
-    <td width="33%" valign="top">
-      <h3><a href="https://www.ceas.com.mx">CEAS</a></h3>
-      <p>A complete redesign of the site, rebuilt around modern standards of design, conversion and UX.</p>
-      <p><sub>Redesign · UX · Web</sub></p>
-      <a href="https://www.ceas.com.mx"><img src="https://img.shields.io/badge/live-ceas.com.mx-93A29B?style=flat-square&labelColor=222022" alt="Live site" /></a>
+    <td width="50%" valign="top">
+      <a href="https://www.ceas.com.mx"><img src="./assets/work/ceas.svg" alt="CEAS website" width="100%" /></a>
+      <h3><a href="https://www.ceas.com.mx">CEAS</a> · <a href="https://github.com/Jorgi1-1/ceas-web"><sub>repo</sub></a></h3>
+      <p>Full redesign for a school of massage, physiotherapy and alternative health in Puebla. The path is built for enrollment: programs, then upcoming start dates, then contact.</p>
+      <ul>
+        <li>Course catalog, start-date calendar, blog and photo gallery.</li>
+        <li>Admin dashboard so the school edits its own blog and site settings: Firebase Auth, and Firestore rules that let a single authorized account write while the public site reads without login.</li>
+        <li>Validated contact form (React Hook Form + Zod), responsive from phone to desktop, and analytics.</li>
+      </ul>
+      <p><sub>Next.js 16 · TypeScript · Tailwind v4 · Firebase · GSAP · Vercel</sub></p>
     </td>
   </tr>
 </table>
+
+<details>
+<summary><b>More projects</b></summary>
+<br />
+
+| Project | What it is | Stack |
+| --- | --- | --- |
+| [cades-checker](https://github.com/Jorgi1-1/cades-checker) | Inverted QR attendance: each member's phone shows a signed, expiring QR code that organizers scan. | Next.js · Firebase · Tailwind |
+| [jobcron](https://github.com/Jorgi1-1/jobcron) | Bot that checks company career pages twice a day, filters relevant roles and emails a digest. No duplicates, zero infra cost. | TypeScript · scheduled jobs |
+| [SistemaGestionSalud](https://github.com/Jorgi1-1/SistemaGestionSalud) | Campus health platform: students book appointments; doctors manage schedules and clinical records with audit logs. | JavaScript |
+
+</details>
 
 ## Stack
 
@@ -78,10 +91,7 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 
 ## Certifications
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Harness-CI%2FCD_Certified-00ADE4?style=for-the-badge&labelColor=222022&logo=harness&logoColor=white" alt="Harness CI/CD certified" />
-  <img src="https://img.shields.io/badge/Google_Cloud-Cloud_Digital_Leader-4285F4?style=for-the-badge&labelColor=222022&logo=googlecloud&logoColor=white" alt="Google Cloud Digital Leader" />
-</p>
+<img src="./assets/certs.svg" alt="Six Harness Certified Expert credentials (Continuous Integration, Continuous Delivery & GitOps, Cloud & AI Cost Management, each at Developer and Administrator level) and two Google Cloud credentials (Cloud Digital Leader, Build a Secure Google Cloud Network)." width="100%" />
 
 ## Activity
 
@@ -94,8 +104,8 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 Open to full-time roles and freelance projects, remote or in Mexico. LinkedIn is the fastest way to reach me.
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/jorge-luis-tovar-arriaga-a20489293"><img src="https://img.shields.io/badge/LinkedIn-Jorge_Tovar-B7245C?style=for-the-badge&labelColor=222022&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-  <a href="https://jorgi1-1.github.io"><img src="https://img.shields.io/badge/See_the_portfolio-→-c3d809?style=for-the-badge&labelColor=222022" alt="Portfolio" /></a>
+  <a href="https://www.linkedin.com/in/jorge-luis-tovar-arriaga-a20489293"><img src="https://img.shields.io/badge/LinkedIn-Jorge_Tovar-ffd88a?style=for-the-badge&labelColor=131c30&logo=linkedin&logoColor=ffd88a" alt="LinkedIn" /></a>
+  <a href="mailto:jorgi1tovar@gmail.com"><img src="https://img.shields.io/badge/Email-Write_me-a9c1ff?style=for-the-badge&labelColor=131c30&logo=gmail&logoColor=a9c1ff" alt="Email" /></a>
 </p>
 
 <img src="./assets/footer.svg" alt="From interface to infrastructure." width="100%" />

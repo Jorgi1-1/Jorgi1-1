@@ -40,6 +40,7 @@ jobs:
         run: |
           cd scripts
           python build_static.py
+          python build_certs.py
           python build_activity.py
 
       - name: Commit if changed

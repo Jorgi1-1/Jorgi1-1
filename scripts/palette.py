@@ -1,22 +1,48 @@
-"""Tokens from the portfolio's design system ("The Night Sign Shop")."""
+"""Profile palette "Noche": night navy grounds with warm gold light.
 
-NIGHT = "#222022"        # night-ground
-NIGHT_DEEP = "#1a181a"
-RIM = "#ffffff14"
-LIME = "#c3d809"         # sodium-lime
-NEON_WHITE = "#f2f6ff"
-PAPER = "#f4efe2"        # sign-paper
-INK = "#16130f"          # soot-ink
-MAUVE = "#917C87"        # Work
-SAGE = "#93A29B"         # About
-ZINC = "#928F91"         # Stack
-MAGENTA = "#B7245C"      # Contact
-MUTED_TEXT = "#b9b4b7"
+Matches the Qull avatar (assets/avatar). The old portfolio token names are
+kept as aliases so the generators read the same.
+"""
 
-# Lit (neon) versions: same hue, full saturation, lightness >= 78%.
-MAUVE_LIT = "#f0a3cf"
-SAGE_LIT = "#8ff0c4"
-ZINC_LIT = NEON_WHITE
-MAGENTA_LIT = "#ff8fbd"
+# Grounds
+NAVY_TOP = "#1f2c47"
+NAVY = "#131c30"
+NAVY_DEEP = "#080c17"
+NIGHT = NAVY             # card ground
+BODY = "#0b0f1a"         # Qull's ink body on navy
+RIM = "#ffd88a1f"
 
-TOTEM = [(MAUVE, MAUVE_LIT), (SAGE, SAGE_LIT), (ZINC, ZINC_LIT), (MAGENTA, MAGENTA_LIT)]
+# Light
+GOLD = "#ffd88a"
+GOLD_SOFT = "#fff1cf"
+AMBER = "#ffb347"
+CREAM = "#f3ead8"
+MUTED_TEXT = "#aab4c8"
+LABEL = "#7f8aa3"
+
+# Accents (muted on the totem, lit in use)
+PEACH, PEACH_LIT = "#b98a74", "#ffb99a"
+SKY, SKY_LIT = "#6d84b8", "#a9c1ff"
+MINT, MINT_LIT = "#5b9488", "#8fe0cb"
+
+# Aliases used by the generators
+LIME = GOLD
+NEON_WHITE = CREAM
+ZINC = LABEL
+MAUVE, MAUVE_LIT = PEACH, PEACH_LIT
+SAGE, SAGE_LIT = SKY, SKY_LIT
+MAGENTA, MAGENTA_LIT = MINT, MINT_LIT
+
+TOTEM = [(PEACH, PEACH_LIT), (GOLD, GOLD), (SKY, SKY_LIT), (MINT, MINT_LIT)]
+
+
+def card(w, h, rx=28):
+    """Card ground: navy gradient lit from the top right, gold hairline rim."""
+    return f"""<defs>
+    <radialGradient id="card" cx="0.85" cy="0" r="1.25" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="{NAVY_TOP}"/>
+      <stop offset="0.55" stop-color="{NAVY}"/>
+      <stop offset="1" stop-color="{NAVY_DEEP}"/>
+    </radialGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="{rx}" fill="url(#card)" stroke="{RIM}"/>"""
