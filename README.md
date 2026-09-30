@@ -91,7 +91,7 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 
 ## Certifications
 
-<img src="./assets/certs.svg" alt="Six Harness Certified Expert credentials (Continuous Integration, Continuous Delivery & GitOps, Cloud & AI Cost Management, each at Developer and Administrator level) and two Google Cloud credentials (Cloud Digital Leader, Build a Secure Google Cloud Network)." width="100%" />
+<img src="./assets/certs.svg" alt="Six Harness Certified Expert credentials (Continuous Integration, Continuous Delivery & GitOps, Cloud & AI Cost Management, each at Developer and Administrator level), plus Google Cloud Digital Leader." width="100%" />
 
 ## Activity
 

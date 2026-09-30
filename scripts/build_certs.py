@@ -18,8 +18,7 @@ HARNESS = [
     ("Cloud & AI Cost Management", PEACH_LIT, "Oct 2024", "Jul 2025"),
 ]
 GOOGLE = [
-    ("Cloud Digital Leader", "Certification", "Valid until Jul 2029", "seal"),
-    ("Build a Secure Google Cloud Network", "Skill badge · Intermediate", "May 2025", "badge"),
+    ("Cloud Digital Leader", "Google Cloud Certified", "Valid until Jul 2029", "seal"),
 ]
 
 SHIELD = "M4 0H28Q32 0 32 4V19Q32 30 16 38Q0 30 0 19V4Q0 0 4 0Z"
@@ -39,7 +38,7 @@ def build():
     pad = 56
     parts = [
         text("CERTIFICATIONS", pad, 60, "mono-500", 13, GOLD, tracking=0.12),
-        text("8 CREDENTIALS  ·  VERIFIED ON CREDLY", W - pad, 60, "mono-400", 13, LABEL, anchor="end", tracking=0.08),
+        text("7 CREDENTIALS  ·  VERIFIED ON CREDLY", W - pad, 60, "mono-400", 13, LABEL, anchor="end", tracking=0.08),
     ]
 
     # Harness matrix
@@ -64,35 +63,21 @@ def build():
     parts.append(f'<line x1="{gx - 20}" y1="100" x2="{gx - 20}" y2="{row_y - 16}" stroke="#ffffff" stroke-opacity="0.08"/>')
     parts.append(text("GOOGLE CLOUD", gx + 4, 118, "mono-500", 12, MUTED_TEXT, tracking=0.1))
     gy = 150
+    col_w = W - pad - gx
+    card_h = (row_y - 16 - 150 - 16 * (len(GOOGLE) - 1)) / len(GOOGLE)
+    cx = gx + col_w / 2
     for name, kind, date, icon in GOOGLE:
-        parts.append(f'<rect x="{gx}" y="{gy}" width="{W - pad - gx}" height="125" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.06"/>')
-        if icon == "seal":
-            parts.append(f'<circle cx="{gx + 44}" cy="{gy + 46}" r="22" fill="none" stroke="{GOLD}" stroke-width="2"/>'
-                         f'<circle cx="{gx + 44}" cy="{gy + 46}" r="15" fill="{GOLD}" fill-opacity="0.16" stroke="{GOLD}" stroke-width="1.2" stroke-dasharray="2 3"/>'
-                         f'<path d="{STAR}" transform="translate({gx + 39} {gy + 41})" fill="{GOLD}"/>')
-        else:
-            parts.append(f'<rect x="{gx + 22}" y="{gy + 28}" width="44" height="36" rx="6" fill="{GOLD}" fill-opacity="0.16" stroke="{GOLD}" stroke-width="2"/>'
-                         f'<path d="M{gx + 30} {gy + 54}H{gx + 58}" stroke="{GOLD}" stroke-width="2" stroke-linecap="round"/>'
-                         f'<path d="M{gx + 30} {gy + 44}H{gx + 50}" stroke="{GOLD}" stroke-width="2" stroke-linecap="round" opacity=".6"/>')
-        # name may need two lines
-        words, lines, cur = name.split(), [], ""
-        for w_ in words:
-            t = (cur + " " + w_).strip()
-            if measure(t, "body-600", 18) > W - pad - gx - 110 and cur:
-                lines.append(cur)
-                cur = w_
-            else:
-                cur = t
-        lines.append(cur)
-        ty = gy + 40 if len(lines) == 1 else gy + 32
-        for i, ln in enumerate(lines):
-            parts.append(text(ln, gx + 90, ty + i * 23, "body-600", 18, CREAM))
-        parts.append(text(kind, gx + 90, ty + len(lines) * 23 + 4, "body-400", 14, MUTED_TEXT))
-        parts.append(text(date.upper(), gx + 90, gy + 106, "mono-400", 12, LABEL, tracking=0.06))
-        gy += 141
+        parts.append(f'<rect x="{gx}" y="{gy}" width="{col_w}" height="{card_h:.0f}" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.06"/>')
+        sy = gy + 78
+        parts.append(f'<circle cx="{cx}" cy="{sy}" r="40" fill="none" stroke="{GOLD}" stroke-width="2"/>'
+                     f'<circle cx="{cx}" cy="{sy}" r="29" fill="{GOLD}" fill-opacity="0.14" stroke="{GOLD}" stroke-width="1.4" stroke-dasharray="2 4"/>'
+                     f'<path d="{STAR}" transform="translate({cx - 10} {sy - 10}) scale(2)" fill="{GOLD}"/>')
+        parts.append(text(name, cx, gy + 162, "body-600", 21, CREAM, anchor="middle"))
+        parts.append(text(kind, cx, gy + 188, "body-400", 15, MUTED_TEXT, anchor="middle"))
+        parts.append(text(date.upper(), cx, gy + card_h - 26, "mono-400", 12, LABEL, anchor="middle", tracking=0.08))
+        gy += card_h + 16
 
-
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Certifications: six Harness Certified Expert credentials (Continuous Integration, Continuous Delivery and GitOps, Cloud and AI Cost Management, each at Developer and Administrator level) and two Google Cloud credentials (Cloud Digital Leader, Build a Secure Google Cloud Network).">
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Certifications: six Harness Certified Expert credentials (Continuous Integration, Continuous Delivery and GitOps, Cloud and AI Cost Management, each at Developer and Administrator level), plus Google Cloud Digital Leader.">
   <title>Certifications</title>
   {card(W, H)}
   {''.join(parts)}
