@@ -91,7 +91,9 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 
 ## Certifications
 
-<img src="./assets/certs.svg" alt="Six Harness Certified Expert credentials (Continuous Integration, Continuous Delivery & GitOps, Cloud & AI Cost Management, each at Developer and Administrator level), plus Google Cloud Digital Leader." width="100%" />
+<a href="https://www.credly.com/users/jorge-tovar.3dbedb89"><img src="./assets/certs.svg" alt="Six Harness Certified Expert credentials (Continuous Integration, Continuous Delivery & GitOps, Cloud & AI Cost Management, each at Developer and Administrator level), plus Google Cloud Digital Leader." width="100%" /></a>
+
+<sub>Click the card to verify every credential on <a href="https://www.credly.com/users/jorge-tovar.3dbedb89">Credly</a>.</sub>
 
 ## Activity
 
