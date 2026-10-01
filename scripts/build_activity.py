@@ -124,17 +124,17 @@ def build(user):
             colors[e["node"]["name"]] = e["node"]["color"] or ZINC
 
     kpis = [
-        (f"{total:,}", "CONTRIBUTIONS / YEAR"),
-        (f"{active_days}", "ACTIVE DAYS"),
-        (f"{longest}", "LONGEST STREAK"),
-        (f"{user['repositories']['totalCount']}", "PUBLIC REPOS"),
+        (f"{total:,}", "contributions this year"),
+        (f"{active_days}", "active days"),
+        (f"{longest}", "longest streak"),
+        (f"{user['repositories']['totalCount']}", "public repos"),
     ]
     parts = []
     kx = pad
     for value, label in kpis:
         parts.append(text(value, kx, 136, "display-900", 52, LIME if kx == pad else NEON_WHITE))
-        parts.append(text(label, kx, 164, "mono-400", 12, ZINC, tracking=0.1))
-        kx += max(measure(value, "display-900", 52), measure(label, "mono-400", 12, 0.1)) + 48
+        parts.append(text(label, kx, 166, "body-400", 15, MUTED_TEXT))
+        kx += max(measure(value, "display-900", 52), measure(label, "body-400", 15)) + 48
 
     # Languages: a single stacked bar with a legend underneath (top 5).
     grand = sum(langs.values()) or 1
@@ -143,7 +143,7 @@ def build(user):
     lx0, lx1 = kx + 16, W - pad
     lw = lx1 - lx0
     if top and lw > 180:
-        parts.append(text("LANGUAGES", lx0, 88, "mono-500", 12, ZINC, tracking=0.1))
+        parts.append(text("Languages", lx0, 88, "body-600", 14, MUTED_TEXT))
         x = lx0
         segs = []
         for name, size in top:
@@ -184,21 +184,20 @@ def build(user):
                 rects.append(f'<rect x="{x:.0f}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="{LIME}" fill-opacity="{levels[lvl]}"/>')
     grid_bottom = gy + 7 * (cell + gap) - gap
     legend_y = grid_bottom + 34
-    legend = [text("LESS", W - pad - 168, legend_y, "mono-400", 11, ZINC, tracking=0.1)]
+    legend = [text("Less", W - pad - 162, legend_y, "body-400", 13, ZINC)]
     for i, o in enumerate(levels):
         fill = 'fill="#ffffff" fill-opacity="0.05"' if i == 0 else f'fill="{LIME}" fill-opacity="{o}"'
         legend.append(f'<rect x="{W - pad - 128 + i * 16}" y="{legend_y - 11}" width="12" height="12" rx="3" {fill}/>')
-    legend.append(text("MORE", W - pad, legend_y, "mono-400", 11, ZINC, anchor="end", tracking=0.1))
-    updated = text(f"LAST 12 MONTHS  ·  CURRENT STREAK {current}  ·  UPDATED {date.today():%Y-%m-%d}",
-                   pad, legend_y, "mono-400", 11, ZINC, tracking=0.08)
+    legend.append(text("More", W - pad, legend_y, "body-400", 13, ZINC, anchor="end"))
+    updated = text(f"Last 12 months  ·  current streak {current}  ·  updated {date.today():%b %-d, %Y}",
+                   pad, legend_y, "body-400", 13, ZINC)
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="GitHub activity: {total} contributions in the last year.">
   <title>GitHub activity for {LOGIN}</title>
   <style>
   </style>
   {card(W, H)}
-  {text("ACTIVITY", pad, 60, "mono-500", 13, LIME, tracking=0.12)}
-  {text("AUTO-UPDATED DAILY BY GITHUB ACTIONS", W - pad, 60, "mono-400", 13, ZINC, anchor="end", tracking=0.08)}
+  {text("Activity", pad, 60, "body-600", 16, MUTED_TEXT)}
   {''.join(parts)}
   {''.join(rects)}
   {''.join(legend)}

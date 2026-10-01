@@ -53,7 +53,7 @@ def hero():
     wt = measure("TOVAR", "display-900", base, -0.01)
     avail = row_right - pad
     size = avail / ((wj + wt) / base + 1.05)
-    name_y = 208
+    name_y = 196
     letters = []
     cx = pad
     for word, start in (("JORGE", pad), ("TOVAR", row_right - measure("TOVAR", "display-900", size, -0.01))):
@@ -68,14 +68,14 @@ def hero():
 
     # The fill is always there, so the name reads even where SVG animation
     # doesn't run (thumbnails, throttled tabs). A neon outline traces over it.
-    letter_svg = f'    <path fill="url(#shine)" d="{" ".join(letters)}"/>\n' + "\n".join(
+    letter_svg = f'    <path fill="{LIME}" d="{" ".join(letters)}"/>\n' + "\n".join(
         f'    <path class="tube" style="animation-delay:{0.3 + i * 0.09:.2f}s" pathLength="1" d="{d}"/>'
         for i, d in enumerate(letters)
     )
 
     roles = ["DEVOPS & CLOUD ENGINEER", "FULLSTACK DEVELOPER", "UX/UI DESIGNER"]
-    role_colors = [LIME, SAGE_LIT, MAUVE_LIT]
-    role_y = 300
+    role_colors = [NEON_WHITE] * 3
+    role_y = 290
     role_size = 50
     role_svg = "\n".join(
         f'    <g class="role role-{i}">{text(r, pad, role_y, "display-700", role_size, c, tracking=0.01)}</g>'
@@ -89,14 +89,11 @@ def hero():
     )
 
     tagline = text("From interface to infrastructure. I design it, build it, and keep it running.",
-                   pad, 352, "body-400", 21, MUTED_TEXT)
-    meta_left = text("PUEBLA, MX  ·  GMT-6  ·  ES / EN", pad, 412, "mono-400", 14, ZINC, tracking=0.04)
-    status = text("OPEN TO FULL-TIME ROLES & FREELANCE", row_right, 412, "mono-500", 14, LIME,
-                  anchor="end", tracking=0.04)
-    status_w = measure("OPEN TO FULL-TIME ROLES & FREELANCE", "mono-500", 14, 0.04)
-    dot_x = row_right - status_w - 16
-    url = text("GITHUB.COM/JORGI1-1", pad, 92, "mono-400", 13, ZINC, tracking=0.08)
-    index = text("PROFILE / 2026", row_right, 92, "mono-400", 13, ZINC, anchor="end", tracking=0.08)
+                   pad, 342, "body-400", 21, MUTED_TEXT)
+    meta_left = text("Puebla, Mexico  ·  jorgi1-1.github.io", pad, 414, "body-400", 16, MUTED_TEXT)
+    status_txt = "Open to full-time roles and freelance"
+    status = text(status_txt, row_right, 414, "body-600", 16, LIME, anchor="end")
+    dot_x = row_right - measure(status_txt, "body-600", 16) - 14
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Jorge Tovar. DevOps and Cloud Engineer, fullstack developer and UX/UI designer.">
   <title>Jorge Tovar: DevOps &amp; Cloud Engineer, Fullstack Developer, UX/UI Designer</title>
@@ -140,9 +137,6 @@ def hero():
     {REDUCED}
   </style>
   {card(W, H)}
-  <rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="28" fill="url(#dots)"/>
-  {url}
-  {index}
   <g>
 {letter_svg}
   </g>
@@ -153,7 +147,7 @@ def hero():
   {tagline}
   <line x1="{pad}" y1="384" x2="{row_right}" y2="384" stroke="#ffffff" stroke-opacity="0.08"/>
   {meta_left}
-  <circle class="pulse" cx="{dot_x:.1f}" cy="407" r="4.5" fill="{LIME}"/>
+  <circle class="pulse" cx="{dot_x:.1f}" cy="408.5" r="4" fill="{LIME}"/>
   {status}
   <g>
 {totem}
@@ -164,46 +158,41 @@ def hero():
 
 
 def pipeline():
-    W, H = 1200, 330
+    W, H = 1200, 300
     stages = [
-        ("01", "DESIGN", "Figma · UX/UI", "Design systems", MAUVE, MAUVE_LIT),
-        ("02", "BUILD", "Next.js · TypeScript", "Node.js · PostgreSQL", SAGE, SAGE_LIT),
-        ("03", "SECURE", "DevSecOps practice", "Scans in every pipeline", ZINC, NEON_WHITE),
-        ("04", "SHIP", "Harness CI/CD", "GitHub Actions", MAGENTA, MAGENTA_LIT),
-        ("05", "RUN", "GCP · AWS · GKE", "Terraform · Docker", LIME, LIME),
+        ("01", "Design", "Figma, UX/UI", "design systems"),
+        ("02", "Build", "Next.js, TypeScript", "Node.js, PostgreSQL"),
+        ("03", "Secure", "DevSecOps practice,", "scans in every pipeline"),
+        ("04", "Ship", "Harness CI/CD", "GitHub Actions"),
+        ("05", "Run", "GCP, AWS, GKE", "Terraform, Docker"),
     ]
-    xs = [140 + i * 230 for i in range(5)]
-    y = 150
+    pad = 64
+    col = (W - 2 * pad) / len(stages)
+    xs = [pad + i * col for i in range(len(stages))]
+    y = 132
     dur = 10
-    track = f'<line x1="{xs[0]}" y1="{y}" x2="{xs[-1]}" y2="{y}" stroke="#ffffff" stroke-opacity="0.14" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>'
-    progress = (f'<line x1="{xs[0]}" y1="{y}" x2="{xs[-1]}" y2="{y}" stroke="url(#flow)" stroke-width="2.5" stroke-linecap="round" '
+    end_x = xs[-1] + col - 24
+    track = f'<line x1="{xs[0]}" y1="{y}" x2="{end_x}" y2="{y}" stroke="#ffffff" stroke-opacity="0.12"/>'
+    progress = (f'<line x1="{xs[0]}" y1="{y}" x2="{end_x}" y2="{y}" stroke="{LIME}" stroke-width="1.5" '
                 f'pathLength="1" stroke-dasharray="1 1" class="flow"/>')
-    span = xs[-1] - xs[0]
+    span = end_x - xs[0]
     nodes = []
-    for i, (num, name, l1, l2, muted, lit) in enumerate(stages, 1):
-        x = xs[i - 1]
-        t = (x - xs[0]) / span * 0.7  # pulse runs during first 70% of the loop
+    for i, (num, name, l1, l2) in enumerate(stages):
+        x = xs[i]
+        t = (x - xs[0]) / span * 0.7  # the light passes during the first 70% of the loop
+        on = f"0;{max(t - 0.001, 0):.3f};{min(t + 0.14, 0.97):.3f};1"
         nodes.append(f"""
   <g>
-    {text(num, x, y - 50, "mono-400", 13, ZINC, anchor="middle", tracking=0.1)}
-    <circle cx="{x}" cy="{y}" r="22" fill="{NIGHT}" stroke="{muted}" stroke-width="2"/>
-    <circle cx="{x}" cy="{y}" r="7" fill="{muted}">
-      <animate attributeName="fill" values="{muted};{lit};{lit};{muted}" keyTimes="0;{max(t - 0.001, 0):.3f};{min(t + 0.12, 0.97):.3f};1" dur="{dur}s" repeatCount="indefinite"/>
-      <animate attributeName="r" values="7;7;10;7;7" keyTimes="0;{max(t - 0.001, 0):.3f};{min(t + 0.03, 0.98):.3f};{min(t + 0.12, 0.99):.3f};1" dur="{dur}s" repeatCount="indefinite"/>
-    </circle>
-    {text(name, x, y + 66, "body-600", 22, lit, anchor="middle", tracking=0.08)}
-    {text(l1, x, y + 96, "body-400", 16, MUTED_TEXT, anchor="middle")}
-    {text(l2, x, y + 120, "body-400", 16, MUTED_TEXT, anchor="middle")}
+    {text(num, x, y - 26, "mono-400", 13, ZINC)}
+    <rect x="{x - 0.5}" y="{y - 7}" width="9" height="14" rx="1.5" fill="{ZINC}">
+      <animate attributeName="fill" values="{ZINC};{LIME};{LIME};{ZINC}" keyTimes="{on}" dur="{dur}s" repeatCount="indefinite"/>
+    </rect>
+    {text(name, x, y + 52, "body-600", 22, NEON_WHITE)}
+    {text(l1, x, y + 82, "body-400", 15, MUTED_TEXT)}
+    {text(l2, x, y + 104, "body-400", 15, MUTED_TEXT)}
   </g>""")
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="How I ship: design, build, secure, ship, run.">
   <title>How I ship: Design, Build, Secure, Ship, Run</title>
-  <defs>
-    <linearGradient id="flow" x1="{xs[0]}" x2="{xs[-1]}" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="{MAUVE_LIT}"/><stop offset="0.25" stop-color="{SAGE_LIT}"/>
-      <stop offset="0.5" stop-color="{NEON_WHITE}"/><stop offset="0.75" stop-color="{MAGENTA_LIT}"/>
-      <stop offset="1" stop-color="{LIME}"/>
-    </linearGradient>
-  </defs>
   <style>
     .flow {{ animation: flow {dur}s cubic-bezier(.45,0,.55,1) infinite; }}
     @keyframes flow {{ 0% {{ stroke-dashoffset: 1; opacity: 1; }} 70% {{ stroke-dashoffset: 0; opacity: 1; }}
@@ -211,14 +200,9 @@ def pipeline():
     {REDUCED}
   </style>
   {card(W, H)}
-  {text("HOW I SHIP", 56, 56, "mono-500", 13, LIME, tracking=0.12)}
-  {text("ONE PERSON, THE WHOLE LIFECYCLE", W - 56, 56, "mono-400", 13, ZINC, anchor="end", tracking=0.08)}
+  {text("How I ship", pad, 58, "body-600", 16, MUTED_TEXT)}
   {track}
   {progress}
-  <circle r="5" fill="{NEON_WHITE}">
-    <animateMotion path="M{xs[0]} {y}H{xs[-1]}" dur="{dur}s" keyPoints="0;1;1" keyTimes="0;0.7;1" calcMode="spline" keySplines=".45 0 .55 1;0 0 1 1" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.7;0.75;1" dur="{dur}s" repeatCount="indefinite"/>
-  </circle>
 {''.join(nodes)}
 </svg>
 """
@@ -226,10 +210,10 @@ def pipeline():
 
 
 def footer():
-    W, H = 1200, 150
-    line = "FROM INTERFACE TO INFRASTRUCTURE."
+    W, H = 1200, 140
+    line = "From interface to infrastructure."
     size = 30
-    w = measure(line, "display-900", size, 0.01)
+    w = measure(line, "display-700", size)
     stripes = "".join(
         f'<rect x="{W / 2 - 66 + i * 34}" y="104" width="28" height="6" rx="3" fill="{muted}"/>'
         for i, (muted, _) in enumerate(TOTEM)
@@ -246,9 +230,8 @@ def footer():
     {REDUCED}
   </style>
   {card(W, H)}
-{qull(W / 2 + 26 - w / 2 - 62, 32, 50)}
-  {text(line, W / 2 + 26, 76, "display-900", size, LIME, anchor="middle", tracking=0.01)}
-  {stripes}
+{qull(W / 2 + 26 - w / 2 - 66, 40, 52)}
+  {text(line, W / 2 + 26, 84, "display-700", size, LIME, anchor="middle")}
 </svg>
 """
     (ASSETS / "footer.svg").write_text(svg)

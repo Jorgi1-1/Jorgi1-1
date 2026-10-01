@@ -1,9 +1,13 @@
-<img src="./assets/hero.svg" alt="Jorge Tovar. DevOps & Cloud Engineer, Fullstack Developer, UX/UI Designer." width="100%" />
+<a href="https://jorgi1-1.github.io"><img src="./assets/hero.svg" alt="Jorge Tovar. DevOps & Cloud Engineer, Fullstack Developer, UX/UI Designer." width="100%" /></a>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/jorge-luis-tovar-arriaga-a20489293"><img src="https://img.shields.io/badge/LinkedIn-Let's_talk-ffd88a?style=for-the-badge&labelColor=131c30&logo=linkedin&logoColor=ffd88a" alt="LinkedIn" /></a>
-  <a href="mailto:jorgi1tovar@gmail.com"><img src="https://img.shields.io/badge/Email-jorgi1tovar@gmail.com-a9c1ff?style=for-the-badge&labelColor=131c30&logo=gmail&logoColor=a9c1ff" alt="Email" /></a>
-  <a href="https://www.kansostudio.com.mx"><img src="https://img.shields.io/badge/Studio-Kanso-8fe0cb?style=for-the-badge&labelColor=131c30" alt="Kanso Studio" /></a>
+  <a href="https://jorgi1-1.github.io"><b>Portfolio</b></a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://www.linkedin.com/in/jorge-luis-tovar-arriaga-a20489293">LinkedIn</a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="mailto:jorgi1tovar@gmail.com">jorgi1tovar@gmail.com</a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://www.kansostudio.com.mx">Kanso Studio</a>
 </p>
 
 <p align="center">
@@ -69,6 +73,7 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 
 | Project | What it is | Stack |
 | --- | --- | --- |
+| [jorgi1-1.github.io](https://github.com/Jorgi1-1/Jorgi1-1.github.io) | My [portfolio](https://jorgi1-1.github.io): one page of living type, with a WebGPU shader masked into the letters and a color totem as navigation. Deployed to GitHub Pages by Actions. | Next.js 16 · React 19 · GSAP · WebGPU |
 | [cades-checker](https://github.com/Jorgi1-1/cades-checker) | Inverted QR attendance: each member's phone shows a signed, expiring QR code that organizers scan. | Next.js · Firebase · Tailwind |
 | [jobcron](https://github.com/Jorgi1-1/jobcron) | Bot that checks company career pages twice a day, filters relevant roles and emails a digest. No duplicates, zero infra cost. | TypeScript · scheduled jobs |
 | [SistemaGestionSalud](https://github.com/Jorgi1-1/SistemaGestionSalud) | Campus health platform: students book appointments; doctors manage schedules and clinical records with audit logs. | JavaScript |
@@ -76,11 +81,6 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 </details>
 
 ## Stack
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=gcp,aws,terraform,kubernetes,docker,githubactions,linux,python&theme=dark" alt="GCP, AWS, Terraform, Kubernetes, Docker, GitHub Actions, Linux, Python" /><br />
-  <img src="https://skillicons.dev/icons?i=ts,nextjs,react,nodejs,postgres,mongodb,firebase,supabase,tailwind,figma&theme=dark" alt="TypeScript, Next.js, React, Node.js, PostgreSQL, MongoDB, Firebase, Supabase, Tailwind, Figma" />
-</p>
 
 <table align="center">
   <tr><td><strong>Infrastructure &amp; DevOps</strong></td><td>Harness CI/CD · GitHub Actions · Terraform · Docker · Kubernetes (GKE) · GCP · AWS</td></tr>
@@ -101,11 +101,14 @@ Most people pick a side of the stack. I like owning the whole path: the screen a
 
 ## Let's talk
 
-Open to full-time roles and freelance projects, remote or in Mexico. LinkedIn is the fastest way to reach me.
+Open to full-time roles and freelance projects, remote or in Mexico. LinkedIn is the fastest way to reach me, and the [portfolio](https://jorgi1-1.github.io) shows the rest.
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/jorge-luis-tovar-arriaga-a20489293"><img src="https://img.shields.io/badge/LinkedIn-Jorge_Tovar-ffd88a?style=for-the-badge&labelColor=131c30&logo=linkedin&logoColor=ffd88a" alt="LinkedIn" /></a>
-  <a href="mailto:jorgi1tovar@gmail.com"><img src="https://img.shields.io/badge/Email-Write_me-a9c1ff?style=for-the-badge&labelColor=131c30&logo=gmail&logoColor=a9c1ff" alt="Email" /></a>
+  <a href="https://www.linkedin.com/in/jorge-luis-tovar-arriaga-a20489293"><b>Message me on LinkedIn</b></a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="mailto:jorgi1tovar@gmail.com">Email</a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://jorgi1-1.github.io">Portfolio</a>
 </p>
 
 <img src="./assets/footer.svg" alt="From interface to infrastructure." width="100%" />

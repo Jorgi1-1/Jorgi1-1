@@ -10,7 +10,7 @@ NAVY = "#131c30"
 NAVY_DEEP = "#080c17"
 NIGHT = NAVY             # card ground
 BODY = "#0b0f1a"         # Qull's ink body on navy
-RIM = "#ffd88a1f"
+RIM = "#ffffff14"
 
 # Light
 GOLD = "#ffd88a"
@@ -37,12 +37,11 @@ TOTEM = [(PEACH, PEACH_LIT), (GOLD, GOLD), (SKY, SKY_LIT), (MINT, MINT_LIT)]
 
 
 def card(w, h, rx=28):
-    """Card ground: navy gradient lit from the top right, gold hairline rim."""
+    """Card ground: a quiet navy fade and a neutral hairline."""
     return f"""<defs>
-    <radialGradient id="card" cx="0.85" cy="0" r="1.25" gradientUnits="objectBoundingBox">
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="{NAVY_TOP}"/>
-      <stop offset="0.55" stop-color="{NAVY}"/>
-      <stop offset="1" stop-color="{NAVY_DEEP}"/>
-    </radialGradient>
+      <stop offset="1" stop-color="{NAVY}"/>
+    </linearGradient>
   </defs>
   <rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="{rx}" fill="url(#card)" stroke="{RIM}"/>"""

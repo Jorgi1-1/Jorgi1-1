@@ -30,8 +30,8 @@ def build(name, domain, tag):
     shot_w = W - 2 * inset
     shot_h = round(h_img * shot_w / w_img)
     H = bar + shot_h + inset
-    dots = "".join(f'<circle cx="{30 + i * 18}" cy="{bar / 2}" r="5" fill="{c}"/>'
-                   for i, c in enumerate((PEACH_LIT, GOLD, MINT_LIT)))
+    dots = "".join(f'<circle cx="{30 + i * 18}" cy="{bar / 2}" r="5" fill="{c}" fill-opacity="0.16"/>'
+                   for i, c in enumerate(("#ffffff",) * 3))
     url_box = (f'<rect x="{W / 2 - 150}" y="{bar / 2 - 14}" width="300" height="28" rx="14" '
                f'fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.08"/>')
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Screenshot of {domain}">
@@ -39,8 +39,7 @@ def build(name, domain, tag):
   {card(W, H, rx=22)}
   {dots}
   {url_box}
-  {text(domain, W / 2, bar / 2 + 5, "mono-400", 13, SKY_LIT, anchor="middle", tracking=0.02)}
-  {text(tag, W - 28, bar / 2 + 4, "mono-500", 11, LABEL, anchor="end", tracking=0.12)}
+  {text(domain, W / 2, bar / 2 + 5, "body-400", 14, LABEL, anchor="middle")}
   <clipPath id="shot"><rect x="{inset}" y="{bar}" width="{shot_w}" height="{shot_h}" rx="12"/></clipPath>
   <image x="{inset}" y="{bar}" width="{shot_w}" height="{shot_h}" clip-path="url(#shot)" preserveAspectRatio="xMidYMin slice"
          href="data:image/jpeg;base64,{data}" xlink:href="data:image/jpeg;base64,{data}"/>

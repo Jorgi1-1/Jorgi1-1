@@ -1,83 +1,74 @@
-"""Builds assets/certs.svg: Harness track x level matrix plus Google Cloud.
+"""Builds assets/certs.svg: an editorial table of credentials.
 
     python scripts/build_certs.py
 
-Credentials are listed in CERTS below; all are public on Credly.
+All credentials are public on Credly.
 """
 from pathlib import Path
 
-from palette import (CREAM, GOLD, LABEL, MINT_LIT, MUTED_TEXT, PEACH_LIT, SKY_LIT, card)
+from palette import CREAM, GOLD, LABEL, MUTED_TEXT, card
 from svgtext import measure, text
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
 
 HARNESS = [
-    # track, color, developer date, administrator date
-    ("Continuous Integration", SKY_LIT, "Jun 2024", "Dec 2024"),
-    ("Continuous Delivery & GitOps", MINT_LIT, "Jul 2024", "Feb 2025"),
-    ("Cloud & AI Cost Management", PEACH_LIT, "Oct 2024", "Jul 2025"),
+    # track, developer, administrator
+    ("Continuous Integration", "Jun 2024", "Dec 2024"),
+    ("Continuous Delivery & GitOps", "Jul 2024", "Feb 2025"),
+    ("Cloud & AI Cost Management", "Oct 2024", "Jul 2025"),
 ]
-GOOGLE = [
-    ("Cloud Digital Leader", "Google Cloud Certified", "Valid until Jul 2029", "seal"),
-]
+GOOGLE = [("Cloud Digital Leader", "Valid until Jul 2029")]
 
-SHIELD = "M4 0H28Q32 0 32 4V19Q32 30 16 38Q0 30 0 19V4Q0 0 4 0Z"
-STAR = "M5 0L6.2 3.4L9.8 3.5L7 5.7L8 9.2L5 7.2L2 9.2L3 5.7L0.2 3.5L3.8 3.4Z"
-
-
-def shield(x, y, color, stars):
-    st = "".join(
-        f'<path d="{STAR}" transform="translate({16 - 6 * stars + 1 + i * 12} 13)" fill="{GOLD}"/>'
-        for i in range(stars))
-    return (f'<g transform="translate({x} {y})"><path d="{SHIELD}" fill="{color}" fill-opacity="0.16" '
-            f'stroke="{color}" stroke-width="2"/>{st}</g>')
+HAIR = 'stroke="#ffffff" stroke-opacity="0.09"'
 
 
 def build():
-    W, H = 1200, 470
-    pad = 56
-    parts = [
-        text("CERTIFICATIONS", pad, 60, "mono-500", 13, GOLD, tracking=0.12),
-        text("7 CREDENTIALS  ·  VERIFIED ON CREDLY", W - pad, 60, "mono-400", 13, LABEL, anchor="end", tracking=0.08),
-    ]
+    W = 1200
+    pad = 64
+    parts = []
+    total = len(HARNESS) * 2 + len(GOOGLE)
 
-    # Harness matrix
-    col_dev, col_adm = 470, 640
-    parts += [
-        text("HARNESS CERTIFIED EXPERT", pad, 118, "mono-500", 12, MUTED_TEXT, tracking=0.1),
-        text("DEVELOPER", col_dev, 118, "mono-400", 12, LABEL, tracking=0.1),
-        text("ADMINISTRATOR", col_adm, 118, "mono-400", 12, LABEL, tracking=0.1),
-    ]
-    row_y = 150
-    for track, color, dev, adm in HARNESS:
-        parts.append(f'<rect x="{pad}" y="{row_y}" width="{760 - pad}" height="78" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.06"/>')
-        parts.append(f'<rect x="{pad}" y="{row_y + 18}" width="4" height="42" rx="2" fill="{color}"/>')
-        parts.append(text(track, pad + 24, row_y + 46, "body-600", 20, CREAM))
-        for cx, date, stars in ((col_dev, dev, 1), (col_adm, adm, 2)):
-            parts.append(shield(cx, row_y + 20, color, stars))
-            parts.append(text(date, cx + 46, row_y + 45, "mono-400", 14, MUTED_TEXT))
-        row_y += 94
+    # Right: the table.
+    x0 = 384
+    x_dev = 846
+    x_adm = W - pad
+    y = 100
+    parts.append(text("Harness Certified Expert", x0, y, "body-600", 14, MUTED_TEXT))
+    parts.append(text("Developer", x_dev, y, "body-400", 14, LABEL, anchor="end"))
+    parts.append(text("Administrator", x_adm, y, "body-400", 14, LABEL, anchor="end"))
+    y += 22
+    parts.append(f'<line x1="{x0}" y1="{y}" x2="{x_adm}" y2="{y}" {HAIR}/>')
+    for track, dev, adm in HARNESS:
+        y += 50
+        parts.append(text(track, x0, y - 4, "body-600", 20, CREAM))
+        parts.append(text(dev, x_dev, y - 4, "mono-400", 15, CREAM, anchor="end"))
+        parts.append(text(adm, x_adm, y - 4, "mono-400", 15, CREAM, anchor="end"))
+        y += 18
+        parts.append(f'<line x1="{x0}" y1="{y}" x2="{x_adm}" y2="{y}" {HAIR}/>')
 
-    # Google Cloud column
-    gx = 800
-    parts.append(f'<line x1="{gx - 20}" y1="100" x2="{gx - 20}" y2="{row_y - 16}" stroke="#ffffff" stroke-opacity="0.08"/>')
-    parts.append(text("GOOGLE CLOUD", gx + 4, 118, "mono-500", 12, MUTED_TEXT, tracking=0.1))
-    gy = 150
-    col_w = W - pad - gx
-    card_h = (row_y - 16 - 150 - 16 * (len(GOOGLE) - 1)) / len(GOOGLE)
-    cx = gx + col_w / 2
-    for name, kind, date, icon in GOOGLE:
-        parts.append(f'<rect x="{gx}" y="{gy}" width="{col_w}" height="{card_h:.0f}" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.06"/>')
-        sy = gy + 78
-        parts.append(f'<circle cx="{cx}" cy="{sy}" r="40" fill="none" stroke="{GOLD}" stroke-width="2"/>'
-                     f'<circle cx="{cx}" cy="{sy}" r="29" fill="{GOLD}" fill-opacity="0.14" stroke="{GOLD}" stroke-width="1.4" stroke-dasharray="2 4"/>'
-                     f'<path d="{STAR}" transform="translate({cx - 10} {sy - 10}) scale(2)" fill="{GOLD}"/>')
-        parts.append(text(name, cx, gy + 162, "body-600", 21, CREAM, anchor="middle"))
-        parts.append(text(kind, cx, gy + 188, "body-400", 15, MUTED_TEXT, anchor="middle"))
-        parts.append(text(date.upper(), cx, gy + card_h - 26, "mono-400", 12, LABEL, anchor="middle", tracking=0.08))
-        gy += card_h + 16
+    y += 52
+    parts.append(text("Google Cloud", x0, y, "body-600", 14, MUTED_TEXT))
+    y += 22
+    parts.append(f'<line x1="{x0}" y1="{y}" x2="{x_adm}" y2="{y}" {HAIR}/>')
+    for name, note in GOOGLE:
+        y += 50
+        parts.append(text(name, x0, y - 4, "body-600", 20, CREAM))
+        parts.append(text(note, x_adm, y - 4, "mono-400", 15, CREAM, anchor="end"))
+        y += 18
+        parts.append(f'<line x1="{x0}" y1="{y}" x2="{x_adm}" y2="{y}" {HAIR}/>')
 
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Certifications: six Harness Certified Expert credentials (Continuous Integration, Continuous Delivery and GitOps, Cloud and AI Cost Management, each at Developer and Administrator level), plus Google Cloud Digital Leader.">
+    H = round(y + 64)
+
+    # Left: one large numeral and a short caption, centred on the table.
+    block_h = 150 + 22 + 56
+    top = (H - block_h) / 2 + 6
+    parts.append(text(str(total), pad - 6, top + 140, "display-900", 190, GOLD))
+    parts.append(text("credentials", pad, top + 186, "body-600", 22, CREAM))
+    parts.append(text("Harness and Google Cloud,", pad, top + 218, "body-400", 16, MUTED_TEXT))
+    parts.append(text("all verifiable on Credly.", pad, top + 242, "body-400", 16, MUTED_TEXT))
+    assert measure(str(total), "display-900", 190) < x0 - pad
+
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Certifications: Harness Certified Expert in Continuous Integration, Continuous Delivery and GitOps, and Cloud and AI Cost Management, each at Developer and Administrator level; Google Cloud Digital Leader.">
   <title>Certifications</title>
   {card(W, H)}
   {''.join(parts)}
